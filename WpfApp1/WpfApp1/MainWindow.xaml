@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto" MinHeight="32"/>
+        </Grid.RowDefinitions>
+
+        <Image HorizontalAlignment="Left" Width="166" Source="Res/logo.png" Margin="10,0,0,0"/>
+        <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Width="800" Height="290"/>
+
+        <Button Name="BtnBack" Grid.Row="2" Width="auto" HorizontalAlignment="Left" Content="Назад" Height="auto" Click="BtnBack_Click"/>
     </Grid>
 </Window>

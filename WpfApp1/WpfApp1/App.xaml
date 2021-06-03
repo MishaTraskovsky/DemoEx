@@ -4,6 +4,28 @@
              xmlns:local="clr-namespace:WpfApp1"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="#37474f"/>
+            <Setter Property="Background" Value="#04a0ff"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="#37474f"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="#37474f"/>
+        </Style>
     </Application.Resources>
 </Application>

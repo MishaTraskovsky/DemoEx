@@ -23,6 +23,19 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+
+            if (MainFrame.CanGoBack)
+                BtnBack.Visibility = Visibility.Visible;
+            else
+                BtnBack.Visibility = Visibility.Hidden;
+
+            MainFrame.Navigate(new PageAllHouse());
+            ManagerFrame.MainFrame = MainFrame;
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            ManagerFrame.MainFrame.GoBack();
         }
     }
 }

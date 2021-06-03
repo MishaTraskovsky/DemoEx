@@ -1,0 +1,30 @@
+﻿<Page x:Class="WpfApp1.PageAllHouse"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1"
+      mc:Ignorable="d" 
+      d:DesignHeight="290" d:DesignWidth="800"
+      Title="PageAllHouse"
+      Background="White">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Name="DGreedRC" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" IsReadOnly="True" >
+            <DataGrid.Columns>
+                <DataGridTextColumn  Header="Название" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Количество домов" Binding="{Binding House.Count}"/>
+                <DataGridTextColumn Header="Город" Binding="{Binding City}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="238" Width="200">
+            <TextBlock Margin="15" Text="Сортировка по городу" HorizontalAlignment="Left" Height="20"/>
+            <ComboBox Height="20" Name="CbCities" Margin="15" SelectionChanged="CbCities_SelectionChanged"/> 
+        </StackPanel>
+    </Grid>
+</Page>
