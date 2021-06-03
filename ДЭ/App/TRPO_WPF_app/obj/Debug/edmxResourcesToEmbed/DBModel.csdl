@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TRPO_DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Groupes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="From" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Student_Groupe" FromRole="Groupes" ToRole="Students" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Group" Type="Int32" Nullable="false" />
+    <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Groupes" Relationship="Self.FK_Student_Groupe" FromRole="Students" ToRole="Groupes" />
+    <NavigationProperty Name="Journal" Relationship="Self.FK_Journal_Student1" FromRole="Students" ToRole="Journal" />
+  </EntityType>
+  <EntityType Name="Subjects">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Journal" Relationship="Self.FK_Journal_Subject" FromRole="Subjects" ToRole="Journal" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="E_mail" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Journal" Relationship="Self.FK_Journal_Teachers" FromRole="Teachers" ToRole="Journal" />
+  </EntityType>
+  <EntityType Name="Journal">
+    <Key>
+      <PropertyRef Name="Student" />
+      <PropertyRef Name="Subject" />
+      <PropertyRef Name="Teacher" />
+      <PropertyRef Name="Mark" />
+      <PropertyRef Name="Mark_date" />
+    </Key>
+    <Property Name="Student" Type="Int32" Nullable="false" />
+    <Property Name="Subject" Type="Int32" Nullable="false" />
+    <Property Name="Teacher" Type="Int32" Nullable="false" />
+    <Property Name="Mark" Type="Int32" Nullable="false" />
+    <Property Name="Mark_date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Journal_Student1" FromRole="Journal" ToRole="Students" />
+    <NavigationProperty Name="Subjects" Relationship="Self.FK_Journal_Subject" FromRole="Journal" ToRole="Subjects" />
+    <NavigationProperty Name="Teachers" Relationship="Self.FK_Journal_Teachers" FromRole="Journal" ToRole="Teachers" />
+  </EntityType>
+  <Association Name="FK_Student_Groupe">
+    <End Role="Groupes" Type="Self.Groupes" Multiplicity="1" />
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groupes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="Group" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Journal_Student1">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Journal">
+        <PropertyRef Name="Student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Journal_Subject">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Journal">
+        <PropertyRef Name="Subject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Journal_Teachers">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="1" />
+    <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Journal">
+        <PropertyRef Name="Teacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TRPO_DbEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Groupes" EntityType="Self.Groupes" />
+    <EntitySet Name="Students" EntityType="Self.Students" />
+    <EntitySet Name="Subjects" EntityType="Self.Subjects" />
+    <EntitySet Name="Teachers" EntityType="Self.Teachers" />
+    <EntitySet Name="Journal" EntityType="Self.Journal" />
+    <AssociationSet Name="FK_Student_Groupe" Association="Self.FK_Student_Groupe">
+      <End Role="Groupes" EntitySet="Groupes" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Journal_Student1" Association="Self.FK_Journal_Student1">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Journal" EntitySet="Journal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Journal_Subject" Association="Self.FK_Journal_Subject">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Journal" EntitySet="Journal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Journal_Teachers" Association="Self.FK_Journal_Teachers">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="Journal" EntitySet="Journal" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

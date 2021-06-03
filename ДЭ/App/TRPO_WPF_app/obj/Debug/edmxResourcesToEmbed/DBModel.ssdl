@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище TRPO_DbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Groupes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="From" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="3" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TRPO_Db.dbo.Journal" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Journal">
+    <Key>
+      <PropertyRef Name="Student" />
+      <PropertyRef Name="Subject" />
+      <PropertyRef Name="Teacher" />
+      <PropertyRef Name="Mark" />
+      <PropertyRef Name="Mark_date" />
+    </Key>
+    <Property Name="Student" Type="int" Nullable="false" />
+    <Property Name="Subject" Type="int" Nullable="false" />
+    <Property Name="Teacher" Type="int" Nullable="false" />
+    <Property Name="Mark" Type="int" Nullable="false" />
+    <Property Name="Mark_date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Group" Type="int" Nullable="false" />
+    <Property Name="E-mail" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nchar" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="Subjects">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="E-mail" Type="nvarchar" MaxLength="25" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="25" />
+  </EntityType>
+  <Association Name="FK_Journal_Student1">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Journal">
+        <PropertyRef Name="Student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Journal_Subject">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Journal">
+        <PropertyRef Name="Subject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Journal_Teachers">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="1" />
+    <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Journal">
+        <PropertyRef Name="Teacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Groupe">
+    <End Role="Groupes" Type="Self.Groupes" Multiplicity="1" />
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groupes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="Group" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище TRPO_DbModelContainer">
+    <EntitySet Name="Groupes" EntityType="Self.Groupes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Journal" EntityType="Self.Journal" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Journal].[Student] AS [Student], 
+    [Journal].[Subject] AS [Subject], 
+    [Journal].[Teacher] AS [Teacher], 
+    [Journal].[Mark] AS [Mark], 
+    [Journal].[Mark_date] AS [Mark_date]
+    FROM [dbo].[Journal] AS [Journal]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Journal_Student1" Association="Self.FK_Journal_Student1">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Journal" EntitySet="Journal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Journal_Subject" Association="Self.FK_Journal_Subject">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Journal" EntitySet="Journal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Journal_Teachers" Association="Self.FK_Journal_Teachers">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="Journal" EntitySet="Journal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Groupe" Association="Self.FK_Student_Groupe">
+      <End Role="Groupes" EntitySet="Groupes" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

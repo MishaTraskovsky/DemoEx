@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0bef7f3145bc4d3dbafde5438e61de55" Name="Diagram1">
+        <EntityTypeShape EntityType="RealEstateAgencyModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.Client" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.Deal" Width="1.5" PointX="8.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.Demand" Width="1.5" PointX="6" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.Estate" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.Filter" Width="1.5" PointX="3.75" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.Flat" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.FlatFilter" Width="1.5" PointX="6" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.House" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.HouseFilter" Width="1.5" PointX="6" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.LandPlot" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.LandPlotFilter" Width="1.5" PointX="6" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.Realtor" Width="1.5" PointX="3.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateAgencyModel.Supply" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_Demand_dbo_Client_ClientId" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_Supply_dbo_Client_ClientId" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_Deal_dbo_Demand_DemandId" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_Deal_dbo_Supply_SupplyId" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_Demand_dbo_Filter_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_Demand_dbo_Realtor_RealtorId" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_Flat_dbo_Estate_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_House_dbo_Estate_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_LandPlot_dbo_Estate_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_Supply_dbo_Estate_EstleId" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_FlatFilter_dbo_Filter_DemandId" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_HouseFilter_dbo_Filter_DemandId" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_LandPlotFilter_dbo_Filter_DemandId" ManuallyRouted="false" />
+        <AssociationConnector Association="RealEstateAgencyModel.FK_dbo_Supply_dbo_Realtor_RealtorId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

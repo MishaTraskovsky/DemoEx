@@ -1,0 +1,39 @@
+﻿<Page x:Class="TRPO_WPF_app.PageSignIn"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TRPO_WPF_app"
+      mc:Ignorable="d"
+      Title="PageSignIn">
+
+    <Grid>
+
+        <Border Width="340" VerticalAlignment="Center" CornerRadius="20" Margin="15" Background="#ffffff" Padding="15">
+            <StackPanel>
+                <TextBlock Text="Добро пожаловать" FontSize="23" FontWeight="Bold" FontFamily="Segoe Print" Margin="0 0 0 25"/>
+
+                <TextBlock  Text="Логин" FontFamily="Segoe Print"/>
+                <TextBox Name="txtLogin">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="6"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <TextBlock  Text="Пароль" FontFamily="Segoe Print"/>
+                <TextBox Name="txtPass">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="6"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Grid>
+                    <Button HorizontalAlignment="Left" Content="Назад" FontSize="15" FontFamily="Segoe Print" Margin="-8,0,0,0" Click="BackClick"/>
+                    <Button HorizontalAlignment="Right" Content="Войти" FontSize="15" FontFamily="Segoe Print" Margin="-8,0,0,0" Click="SignInClick"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

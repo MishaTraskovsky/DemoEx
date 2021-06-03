@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище RealEstateAgencyModelContainer" CdmEntityContainer="RealEstateAgencyEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Deal">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.Deal">
+        <MappingFragment StoreEntitySet="Deal">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DemandId" ColumnName="DemandId" />
+          <ScalarProperty Name="SupplyId" ColumnName="SupplyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Demand">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.Demand">
+        <MappingFragment StoreEntitySet="Demand">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="RealtorId" ColumnName="RealtorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estate">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.Estate">
+        <MappingFragment StoreEntitySet="Estate">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="HouseNum" ColumnName="HouseNum" />
+          <ScalarProperty Name="FlatNum" ColumnName="FlatNum" />
+          <ScalarProperty Name="CoordinateLatitude" ColumnName="CoordinateLatitude" />
+          <ScalarProperty Name="CoordinateLongitude" ColumnName="CoordinateLongitude" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Filter">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.Filter">
+        <MappingFragment StoreEntitySet="Filter">
+          <ScalarProperty Name="DemandId" ColumnName="DemandId" />
+          <ScalarProperty Name="MinArea" ColumnName="MinArea" />
+          <ScalarProperty Name="MaxArea" ColumnName="MaxArea" />
+          <ScalarProperty Name="MinCoordinateLatitude" ColumnName="MinCoordinateLatitude" />
+          <ScalarProperty Name="MaxCoordinateLatitude" ColumnName="MaxCoordinateLatitude" />
+          <ScalarProperty Name="MinCoordinateLongitude" ColumnName="MinCoordinateLongitude" />
+          <ScalarProperty Name="MaxCoordinateLongitude" ColumnName="MaxCoordinateLongitude" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="HouseNum" ColumnName="HouseNum" />
+          <ScalarProperty Name="FlatNum" ColumnName="FlatNum" />
+          <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+          <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Flat">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.Flat">
+        <MappingFragment StoreEntitySet="Flat">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Floor" ColumnName="Floor" />
+          <ScalarProperty Name="RoomCount" ColumnName="RoomCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlatFilter">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.FlatFilter">
+        <MappingFragment StoreEntitySet="FlatFilter">
+          <ScalarProperty Name="DemandId" ColumnName="DemandId" />
+          <ScalarProperty Name="MinFloor" ColumnName="MinFloor" />
+          <ScalarProperty Name="MaxFloor" ColumnName="MaxFloor" />
+          <ScalarProperty Name="MinRoomCount" ColumnName="MinRoomCount" />
+          <ScalarProperty Name="MaxRoomCount" ColumnName="MaxRoomCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="House">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.House">
+        <MappingFragment StoreEntitySet="House">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FloorCount" ColumnName="FloorCount" />
+          <ScalarProperty Name="RoomCount" ColumnName="RoomCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HouseFilter">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.HouseFilter">
+        <MappingFragment StoreEntitySet="HouseFilter">
+          <ScalarProperty Name="DemandId" ColumnName="DemandId" />
+          <ScalarProperty Name="MinFloorCount" ColumnName="MinFloorCount" />
+          <ScalarProperty Name="MaxFloorCount" ColumnName="MaxFloorCount" />
+          <ScalarProperty Name="MinRoomCount" ColumnName="MinRoomCount" />
+          <ScalarProperty Name="MaxRoomCount" ColumnName="MaxRoomCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LandPlot">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.LandPlot">
+        <MappingFragment StoreEntitySet="LandPlot">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LandPlotFilter">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.LandPlotFilter">
+        <MappingFragment StoreEntitySet="LandPlotFilter">
+          <ScalarProperty Name="DemandId" ColumnName="DemandId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Realtor">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.Realtor">
+        <MappingFragment StoreEntitySet="Realtor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DealShare" ColumnName="DealShare" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Supply">
+      <EntityTypeMapping TypeName="RealEstateAgencyModel.Supply">
+        <MappingFragment StoreEntitySet="Supply">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="RealtorId" ColumnName="RealtorId" />
+          <ScalarProperty Name="EstleId" ColumnName="EstleId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

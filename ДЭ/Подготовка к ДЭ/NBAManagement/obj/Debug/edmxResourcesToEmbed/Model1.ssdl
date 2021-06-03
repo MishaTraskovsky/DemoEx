@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище DemoExModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryCode" />
+    </Key>
+    <Property Name="CountryCode" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="CountryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="PlayerId" />
+    </Key>
+    <Property Name="PlayerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Gender" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="Height" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Weight" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="ShirtNumber" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="CountryCode" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="TeamId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PositionName">
+    <Key>
+      <PropertyRef Name="PositionId" />
+    </Key>
+    <Property Name="PositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PositionPlayer">
+    <Key>
+      <PropertyRef Name="PositionId" />
+      <PropertyRef Name="PlayerId" />
+    </Key>
+    <Property Name="PositionId" Type="int" Nullable="false" />
+    <Property Name="PlayerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="TeamId" />
+    </Key>
+    <Property Name="TeamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Abbr" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="100" />
+    <Property Name="Discrict" Type="bit" />
+    <Property Name="division" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Player_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Player" Type="Self.Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryCode" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="CountryCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Player_Team">
+    <End Role="Team" Type="Self.Team" Multiplicity="1" />
+    <End Role="Player" Type="Self.Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="TeamId" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="TeamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PositionPlayer_Player">
+    <End Role="Player" Type="Self.Player" Multiplicity="1" />
+    <End Role="PositionPlayer" Type="Self.PositionPlayer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="PlayerId" />
+      </Principal>
+      <Dependent Role="PositionPlayer">
+        <PropertyRef Name="PlayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PositionPlayer_PositionName">
+    <End Role="PositionName" Type="Self.PositionName" Multiplicity="1" />
+    <End Role="PositionPlayer" Type="Self.PositionPlayer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PositionName">
+        <PropertyRef Name="PositionId" />
+      </Principal>
+      <Dependent Role="PositionPlayer">
+        <PropertyRef Name="PositionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище DemoExModelContainer">
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PositionName" EntityType="Self.PositionName" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PositionPlayer" EntityType="Self.PositionPlayer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Player_Country" Association="Self.FK_Player_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Player_Team" Association="Self.FK_Player_Team">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PositionPlayer_Player" Association="Self.FK_PositionPlayer_Player">
+      <End Role="Player" EntitySet="Player" />
+      <End Role="PositionPlayer" EntitySet="PositionPlayer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PositionPlayer_PositionName" Association="Self.FK_PositionPlayer_PositionName">
+      <End Role="PositionName" EntitySet="PositionName" />
+      <End Role="PositionPlayer" EntitySet="PositionPlayer" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

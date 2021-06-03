@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RealEstateAgencyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Phone" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Demand" Relationship="Self.FK_dbo_Demand_dbo_Client_ClientId" FromRole="Client" ToRole="Demand" />
+    <NavigationProperty Name="Supply" Relationship="Self.FK_dbo_Supply_dbo_Client_ClientId" FromRole="Client" ToRole="Supply" />
+  </EntityType>
+  <EntityType Name="Deal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DemandId" Type="Int32" Nullable="false" />
+    <Property Name="SupplyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Demand" Relationship="Self.FK_dbo_Deal_dbo_Demand_DemandId" FromRole="Deal" ToRole="Demand" />
+    <NavigationProperty Name="Supply" Relationship="Self.FK_dbo_Deal_dbo_Supply_SupplyId" FromRole="Deal" ToRole="Supply" />
+  </EntityType>
+  <EntityType Name="Demand">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="RealtorId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_dbo_Demand_dbo_Client_ClientId" FromRole="Demand" ToRole="Client" />
+    <NavigationProperty Name="Deal" Relationship="Self.FK_dbo_Deal_dbo_Demand_DemandId" FromRole="Demand" ToRole="Deal" />
+    <NavigationProperty Name="Filter" Relationship="Self.FK_dbo_Demand_dbo_Filter_Id" FromRole="Demand" ToRole="Filter" />
+    <NavigationProperty Name="Realtor" Relationship="Self.FK_dbo_Demand_dbo_Realtor_RealtorId" FromRole="Demand" ToRole="Realtor" />
+  </EntityType>
+  <EntityType Name="Estate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Area" Type="Double" />
+    <Property Name="HouseNum" Type="Int32" />
+    <Property Name="FlatNum" Type="Int32" />
+    <Property Name="CoordinateLatitude" Type="Single" />
+    <Property Name="CoordinateLongitude" Type="Single" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Flat" Relationship="Self.FK_dbo_Flat_dbo_Estate_Id" FromRole="Estate" ToRole="Flat" />
+    <NavigationProperty Name="House" Relationship="Self.FK_dbo_House_dbo_Estate_Id" FromRole="Estate" ToRole="House" />
+    <NavigationProperty Name="LandPlot" Relationship="Self.FK_dbo_LandPlot_dbo_Estate_Id" FromRole="Estate" ToRole="LandPlot" />
+    <NavigationProperty Name="Supply" Relationship="Self.FK_dbo_Supply_dbo_Estate_EstleId" FromRole="Estate" ToRole="Supply" />
+  </EntityType>
+  <EntityType Name="Filter">
+    <Key>
+      <PropertyRef Name="DemandId" />
+    </Key>
+    <Property Name="DemandId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MinArea" Type="Double" />
+    <Property Name="MaxArea" Type="Double" />
+    <Property Name="MinCoordinateLatitude" Type="Int32" />
+    <Property Name="MaxCoordinateLatitude" Type="Int32" />
+    <Property Name="MinCoordinateLongitude" Type="Int32" />
+    <Property Name="MaxCoordinateLongitude" Type="Int32" />
+    <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HouseNum" Type="Int32" />
+    <Property Name="FlatNum" Type="Int32" />
+    <Property Name="MinPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="MaxPrice" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Demand" Relationship="Self.FK_dbo_Demand_dbo_Filter_Id" FromRole="Filter" ToRole="Demand" />
+    <NavigationProperty Name="FlatFilter" Relationship="Self.FK_dbo_FlatFilter_dbo_Filter_DemandId" FromRole="Filter" ToRole="FlatFilter" />
+    <NavigationProperty Name="HouseFilter" Relationship="Self.FK_dbo_HouseFilter_dbo_Filter_DemandId" FromRole="Filter" ToRole="HouseFilter" />
+    <NavigationProperty Name="LandPlotFilter" Relationship="Self.FK_dbo_LandPlotFilter_dbo_Filter_DemandId" FromRole="Filter" ToRole="LandPlotFilter" />
+  </EntityType>
+  <EntityType Name="Flat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Floor" Type="Int32" Nullable="false" />
+    <Property Name="RoomCount" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Estate" Relationship="Self.FK_dbo_Flat_dbo_Estate_Id" FromRole="Flat" ToRole="Estate" />
+  </EntityType>
+  <EntityType Name="FlatFilter">
+    <Key>
+      <PropertyRef Name="DemandId" />
+    </Key>
+    <Property Name="DemandId" Type="Int32" Nullable="false" />
+    <Property Name="MinFloor" Type="Int32" />
+    <Property Name="MaxFloor" Type="Int32" />
+    <Property Name="MinRoomCount" Type="Int32" />
+    <Property Name="MaxRoomCount" Type="Int32" />
+    <NavigationProperty Name="Filter" Relationship="Self.FK_dbo_FlatFilter_dbo_Filter_DemandId" FromRole="FlatFilter" ToRole="Filter" />
+  </EntityType>
+  <EntityType Name="House">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="FloorCount" Type="Int32" Nullable="false" />
+    <Property Name="RoomCount" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Estate" Relationship="Self.FK_dbo_House_dbo_Estate_Id" FromRole="House" ToRole="Estate" />
+  </EntityType>
+  <EntityType Name="HouseFilter">
+    <Key>
+      <PropertyRef Name="DemandId" />
+    </Key>
+    <Property Name="DemandId" Type="Int32" Nullable="false" />
+    <Property Name="MinFloorCount" Type="Int32" />
+    <Property Name="MaxFloorCount" Type="Int32" />
+    <Property Name="MinRoomCount" Type="Int32" />
+    <Property Name="MaxRoomCount" Type="Int32" />
+    <NavigationProperty Name="Filter" Relationship="Self.FK_dbo_HouseFilter_dbo_Filter_DemandId" FromRole="HouseFilter" ToRole="Filter" />
+  </EntityType>
+  <EntityType Name="LandPlot">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Estate" Relationship="Self.FK_dbo_LandPlot_dbo_Estate_Id" FromRole="LandPlot" ToRole="Estate" />
+  </EntityType>
+  <EntityType Name="LandPlotFilter">
+    <Key>
+      <PropertyRef Name="DemandId" />
+    </Key>
+    <Property Name="DemandId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Filter" Relationship="Self.FK_dbo_LandPlotFilter_dbo_Filter_DemandId" FromRole="LandPlotFilter" ToRole="Filter" />
+  </EntityType>
+  <EntityType Name="Realtor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DealShare" Type="Double" />
+    <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Demand" Relationship="Self.FK_dbo_Demand_dbo_Realtor_RealtorId" FromRole="Realtor" ToRole="Demand" />
+    <NavigationProperty Name="Supply" Relationship="Self.FK_dbo_Supply_dbo_Realtor_RealtorId" FromRole="Realtor" ToRole="Supply" />
+  </EntityType>
+  <EntityType Name="Supply">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="RealtorId" Type="Int32" Nullable="false" />
+    <Property Name="EstleId" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_dbo_Supply_dbo_Client_ClientId" FromRole="Supply" ToRole="Client" />
+    <NavigationProperty Name="Deal" Relationship="Self.FK_dbo_Deal_dbo_Supply_SupplyId" FromRole="Supply" ToRole="Deal" />
+    <NavigationProperty Name="Estate" Relationship="Self.FK_dbo_Supply_dbo_Estate_EstleId" FromRole="Supply" ToRole="Estate" />
+    <NavigationProperty Name="Realtor" Relationship="Self.FK_dbo_Supply_dbo_Realtor_RealtorId" FromRole="Supply" ToRole="Realtor" />
+  </EntityType>
+  <Association Name="FK_dbo_Demand_dbo_Client_ClientId">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Demand" Type="Self.Demand" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Demand">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Supply_dbo_Client_ClientId">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supply">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Deal_dbo_Demand_DemandId">
+    <End Role="Demand" Type="Self.Demand" Multiplicity="1" />
+    <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Demand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Deal">
+        <PropertyRef Name="DemandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Deal_dbo_Supply_SupplyId">
+    <End Role="Supply" Type="Self.Supply" Multiplicity="1" />
+    <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supply">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Deal">
+        <PropertyRef Name="SupplyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Demand_dbo_Filter_Id">
+    <End Role="Filter" Type="Self.Filter" Multiplicity="1" />
+    <End Role="Demand" Type="Self.Demand" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Filter">
+        <PropertyRef Name="DemandId" />
+      </Principal>
+      <Dependent Role="Demand">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Demand_dbo_Realtor_RealtorId">
+    <End Role="Realtor" Type="Self.Realtor" Multiplicity="1" />
+    <End Role="Demand" Type="Self.Demand" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Realtor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Demand">
+        <PropertyRef Name="RealtorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Flat_dbo_Estate_Id">
+    <End Role="Estate" Type="Self.Estate" Multiplicity="1" />
+    <End Role="Flat" Type="Self.Flat" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Estate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Flat">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_House_dbo_Estate_Id">
+    <End Role="Estate" Type="Self.Estate" Multiplicity="1" />
+    <End Role="House" Type="Self.House" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Estate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="House">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_LandPlot_dbo_Estate_Id">
+    <End Role="Estate" Type="Self.Estate" Multiplicity="1" />
+    <End Role="LandPlot" Type="Self.LandPlot" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Estate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LandPlot">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Supply_dbo_Estate_EstleId">
+    <End Role="Estate" Type="Self.Estate" Multiplicity="1" />
+    <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supply">
+        <PropertyRef Name="EstleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_FlatFilter_dbo_Filter_DemandId">
+    <End Role="Filter" Type="Self.Filter" Multiplicity="1" />
+    <End Role="FlatFilter" Type="Self.FlatFilter" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Filter">
+        <PropertyRef Name="DemandId" />
+      </Principal>
+      <Dependent Role="FlatFilter">
+        <PropertyRef Name="DemandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_HouseFilter_dbo_Filter_DemandId">
+    <End Role="Filter" Type="Self.Filter" Multiplicity="1" />
+    <End Role="HouseFilter" Type="Self.HouseFilter" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Filter">
+        <PropertyRef Name="DemandId" />
+      </Principal>
+      <Dependent Role="HouseFilter">
+        <PropertyRef Name="DemandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_LandPlotFilter_dbo_Filter_DemandId">
+    <End Role="Filter" Type="Self.Filter" Multiplicity="1" />
+    <End Role="LandPlotFilter" Type="Self.LandPlotFilter" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Filter">
+        <PropertyRef Name="DemandId" />
+      </Principal>
+      <Dependent Role="LandPlotFilter">
+        <PropertyRef Name="DemandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Supply_dbo_Realtor_RealtorId">
+    <End Role="Realtor" Type="Self.Realtor" Multiplicity="1" />
+    <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Realtor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supply">
+        <PropertyRef Name="RealtorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RealEstateAgencyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Deal" EntityType="Self.Deal" />
+    <EntitySet Name="Demand" EntityType="Self.Demand" />
+    <EntitySet Name="Estate" EntityType="Self.Estate" />
+    <EntitySet Name="Filter" EntityType="Self.Filter" />
+    <EntitySet Name="Flat" EntityType="Self.Flat" />
+    <EntitySet Name="FlatFilter" EntityType="Self.FlatFilter" />
+    <EntitySet Name="House" EntityType="Self.House" />
+    <EntitySet Name="HouseFilter" EntityType="Self.HouseFilter" />
+    <EntitySet Name="LandPlot" EntityType="Self.LandPlot" />
+    <EntitySet Name="LandPlotFilter" EntityType="Self.LandPlotFilter" />
+    <EntitySet Name="Realtor" EntityType="Self.Realtor" />
+    <EntitySet Name="Supply" EntityType="Self.Supply" />
+    <AssociationSet Name="FK_dbo_Demand_dbo_Client_ClientId" Association="Self.FK_dbo_Demand_dbo_Client_ClientId">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Demand" EntitySet="Demand" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Supply_dbo_Client_ClientId" Association="Self.FK_dbo_Supply_dbo_Client_ClientId">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Supply" EntitySet="Supply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Deal_dbo_Demand_DemandId" Association="Self.FK_dbo_Deal_dbo_Demand_DemandId">
+      <End Role="Demand" EntitySet="Demand" />
+      <End Role="Deal" EntitySet="Deal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Deal_dbo_Supply_SupplyId" Association="Self.FK_dbo_Deal_dbo_Supply_SupplyId">
+      <End Role="Supply" EntitySet="Supply" />
+      <End Role="Deal" EntitySet="Deal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Demand_dbo_Filter_Id" Association="Self.FK_dbo_Demand_dbo_Filter_Id">
+      <End Role="Filter" EntitySet="Filter" />
+      <End Role="Demand" EntitySet="Demand" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Demand_dbo_Realtor_RealtorId" Association="Self.FK_dbo_Demand_dbo_Realtor_RealtorId">
+      <End Role="Realtor" EntitySet="Realtor" />
+      <End Role="Demand" EntitySet="Demand" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Flat_dbo_Estate_Id" Association="Self.FK_dbo_Flat_dbo_Estate_Id">
+      <End Role="Estate" EntitySet="Estate" />
+      <End Role="Flat" EntitySet="Flat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_House_dbo_Estate_Id" Association="Self.FK_dbo_House_dbo_Estate_Id">
+      <End Role="Estate" EntitySet="Estate" />
+      <End Role="House" EntitySet="House" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_LandPlot_dbo_Estate_Id" Association="Self.FK_dbo_LandPlot_dbo_Estate_Id">
+      <End Role="Estate" EntitySet="Estate" />
+      <End Role="LandPlot" EntitySet="LandPlot" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Supply_dbo_Estate_EstleId" Association="Self.FK_dbo_Supply_dbo_Estate_EstleId">
+      <End Role="Estate" EntitySet="Estate" />
+      <End Role="Supply" EntitySet="Supply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_FlatFilter_dbo_Filter_DemandId" Association="Self.FK_dbo_FlatFilter_dbo_Filter_DemandId">
+      <End Role="Filter" EntitySet="Filter" />
+      <End Role="FlatFilter" EntitySet="FlatFilter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_HouseFilter_dbo_Filter_DemandId" Association="Self.FK_dbo_HouseFilter_dbo_Filter_DemandId">
+      <End Role="Filter" EntitySet="Filter" />
+      <End Role="HouseFilter" EntitySet="HouseFilter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_LandPlotFilter_dbo_Filter_DemandId" Association="Self.FK_dbo_LandPlotFilter_dbo_Filter_DemandId">
+      <End Role="Filter" EntitySet="Filter" />
+      <End Role="LandPlotFilter" EntitySet="LandPlotFilter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Supply_dbo_Realtor_RealtorId" Association="Self.FK_dbo_Supply_dbo_Realtor_RealtorId">
+      <End Role="Realtor" EntitySet="Realtor" />
+      <End Role="Supply" EntitySet="Supply" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

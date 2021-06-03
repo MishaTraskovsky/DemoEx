@@ -1,0 +1,82 @@
+﻿<Page x:Class="NBAManagement.VisitorMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NBAManagement"
+      mc:Ignorable="d"
+      Title="VisitorMenu" Height="450" Width="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="269*"/>
+            <RowDefinition Height="17*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="AliceBlue" Grid.RowSpan="2"/>
+        <TextBlock
+            VerticalAlignment="Center"
+            Text="NBA Management System" Margin="25,20,590,13" Height="16"/>
+        <TextBlock
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Text="Visitor Menu"
+            FontSize="20"
+            Margin="294,12,308,9" Width="115" Height="28"/>
+
+        <Border 
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Grid.Row="1" 
+            BorderBrush="Gray" 
+            BorderThickness="1"
+            Grid.RowSpan="2" 
+            Height="249"
+            Width="478"
+            Margin="20 -60 20 20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button 
+                    Grid.Column="0" 
+                    Grid.Row="0" 
+                    Content="Teams" 
+                    Margin="50 40 50 40" 
+                    Background="SteelBlue" 
+                    Foreground="AliceBlue"
+                    FontSize="20" Click="Button_Click"/>
+                <Button 
+                    Grid.Column="1" 
+                    Grid.Row="0" 
+                    Content="Players" 
+                    Margin="50 40 50 40" 
+                    Background="SteelBlue" 
+                    Foreground="AliceBlue"
+                    FontSize="20"/>
+                <Button 
+                    Grid.Column="0" 
+                    Grid.Row="1" 
+                    Content="Matchups" 
+                    Margin="50 40 50 40" 
+                    Background="SteelBlue" 
+                    Foreground="AliceBlue"
+                    FontSize="20"/>
+                <Button 
+                    Grid.Column="1" 
+                    Grid.Row="1" 
+                    Content="Photos" 
+                    Margin="50 40 50 40" 
+                    Background="SteelBlue" 
+                    Foreground="AliceBlue"
+                    FontSize="20"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

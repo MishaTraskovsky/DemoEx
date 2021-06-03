@@ -1,0 +1,51 @@
+﻿<Page x:Class="TRPO_WPF_app.PageWorkTStudentsList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TRPO_WPF_app"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageWorkTStudentsList" Height="390" Width="755" Background="AliceBlue">
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="167*"/>
+            <ColumnDefinition Width="181*"/>
+            <ColumnDefinition Width="203*"/>
+            <ColumnDefinition Width="204*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Name="DgreedGroups" ColumnWidth="*" BorderBrush="#92eaaa" BorderThickness="2" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,0,1" FontFamily="Segoe Print" Grid.Column="0" SelectionChanged="DGreedGroupSel">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Группа" Binding="{Binding Name}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid Name="DgreedStudents"  ColumnWidth="*" AutoGenerateColumns="False" BorderBrush="#92eaaa" BorderThickness="2" IsReadOnly="True" Margin="0,0,0,1" Grid.ColumnSpan="3" FontFamily="Segoe Print" Grid.Column="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Students.Name}"/>
+                <DataGridTextColumn Header="Группа" Binding="{Binding Students.Groups.Name}"/>
+                <DataGridTextColumn Header="Предмет" Binding="{Binding Subjects.Name}"/>
+                <DataGridTextColumn Header="Оценка" Binding="{Binding Mark}"/>
+                <DataGridTextColumn x:Name="DateColumn" Header="Дата" Binding="{Binding Mark_date, StringFormat={}{0:dd/MM/yyyy}}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="1" Grid.Column="3" Margin="0" Content="Добавить Оценку" Click="NewMarkClick"/>
+        <Button Grid.Row="1" Grid.Column="2" Margin="0" FontSize="18" Click="ReloadClick">
+            <Button.Content>
+                <TextBlock Text="Обновить" TextAlignment="Center"/>
+            </Button.Content>
+        </Button>
+
+        <Button Grid.Row="1" Grid.Column="0" Margin="0" FontSize="18" Click="BackClick">
+            <Button.Content>
+                <TextBlock Text="Назад" TextAlignment="Center"/>
+            </Button.Content>
+        </Button>
+    </Grid>
+</Page>
